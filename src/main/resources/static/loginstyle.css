@@ -1,0 +1,27 @@
+@charset "ISO-8859-1";
+
+body{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+background-image:url('images/4549397.jpg');
+}
+form{
+margin-top:15px;
+display:flex;
+color:white;
+background:transparent;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+width:400px;
+height:300px;
+border-radius:5px;
+height:50vh;
+}
+input,label{
+width:300px;
+height:40px;
+}

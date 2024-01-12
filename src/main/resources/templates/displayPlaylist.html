@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+body{
+	width:100vw;
+	height:100vh;
+	background:whitesmoke;
+	}
+table{
+	display:grid;
+	width:50%;
+	grid-template-rows:auto;
+	}
+</style>
+</head>
+<body>
+<table border>
+	<thead>
+		<tr class="sam">
+			<th>Playlist Name</th>
+			<th>Songs</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="plist:${allPlaylist}">
+			<td th:text="${plist.name}"></td>
+			<td>
+				<ul>
+					<li th:each="songs:${plist.songs}">
+						<span>th:text="${songs.name}"</span>
+						<audio controls>
+    					<source th:src="${songs.link}" type="audio/mpeg">
+  					</audio>
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>

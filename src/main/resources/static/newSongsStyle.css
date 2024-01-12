@@ -1,0 +1,30 @@
+@charset "ISO-8859-1";
+
+body{
+	font-family:Libre Baskerville;
+	height:100vh;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background-image:url('images/headphone.jpg');
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+form{
+	display:grid;
+	grid-row-gap:10px;
+	grid-column-gap:3px;
+	grid-template-columns:1fr 1fr;
+	color:white;
+}
+form .sub{
+	grid-column:span 2;
+}
+input{
+	border-radius:5px;
+	border:none;
+	background:transparent;
+	color:white;
+	outline:none;
+	border-bottom:1px solid white;
+}

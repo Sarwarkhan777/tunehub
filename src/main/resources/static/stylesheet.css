@@ -1,0 +1,50 @@
+@charset "ISO-8859-1";
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('images/4549397.jpg');
+    background-size: cover; /* Optional: Adjust the background size */
+}
+
+.container1 {
+    width: 40vw;
+    height: 60vh;
+    padding: 20px;
+    background: rgba(3, 44, 252);
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+form {
+    background-color: transparent;
+    border-radius: 5px;
+    color: white;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-rows: 33px 33px 33px 33px 33px 38px 80px;
+    grid-column-gap: 5vw;
+    grid-row-gap: 10px;
+}
+
+input,textarea{
+    border-radius: 5px;
+    /* Add this rule to set the background of input elements as transparent */
+}
+.box1 input{
+	margin-left:10px;
+	margin-right:10px;
+}
+.btn {
+    margin-top: 30px;
+    grid-column: span 2;
+    font-size:23px;
+}

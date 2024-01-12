@@ -1,0 +1,12 @@
+@charset "ISO-8859-1";
+body{
+	background-image:url('images/headphone.jpg');
+	background-size: cover;
+	color:white;
+}
+.container1{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:'row'
+}

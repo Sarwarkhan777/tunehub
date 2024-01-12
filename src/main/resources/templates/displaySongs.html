@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+body{
+	width:100vw;
+	height:100vh;
+	background:whitesmoke;
+	}
+table{
+	display:grid;
+	width:100%;
+	grid-template-rows:auto;
+	}
+</style>
+</head>
+<body>
+<h1>Paisa Bohot dekhra tere pass</h1>
+<table>
+		<tr class="sam">
+			<th class="top">Name</th>
+			<th>Artist</th>
+			<th>Genre</th>
+			<th>Play</th>
+		</tr>
+		
+		<tr th:each="song:${songs}">
+			<td th:text="${song.name}"></td>
+			<td th:text="${song.artist}"></td>
+			<td th:text="${song.genre}"></td>
+			
+			<td><audio controls>
+    		<source th:src="${song.link}" type="audio/mpeg">
+  			</audio></td>
+		</tr>
+
+</table>
+</body>
+</html>
