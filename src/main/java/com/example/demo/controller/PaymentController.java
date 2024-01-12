@@ -20,7 +20,19 @@ public class PaymentController {
 public String pay() {
 	return "pay";
 }
-
+@GetMapping("/payment-success")
+	public String paymentSuccess(HttpSession session) {
+		String mail =  (String) session.getAttribute("email");
+		Users u = service.getUser(mail);
+		u.setPremium(true);
+		service.updateUser(u);
+		return "customerhome";
+	}
+	
+	@GetMapping("/payment-failure")
+	public String paymentFailure() {
+		return "customerhome";
+	}
 @SuppressWarnings("finally")
 @PostMapping("/createOrder")
 @ResponseBody
@@ -36,10 +48,10 @@ public String createOrder(HttpSession session) {
 		orderRequest.put("currency", "INR");
 		orderRequest.put("receipt", "order_rcptid_11");
 		order = razorpay.orders.create(orderRequest);
-		String mail =  (String) session.getAttribute("email");
-		Users u = service.getUsers(mail);
-		u.setPremium(true);
-		service.updatUsers(u);
+		// String mail =  (String) session.getAttribute("email");
+		// Users u = service.getUsers(mail);
+		// u.setPremium(true);
+		// service.updatUsers(u);
 
 	} catch (RazorpayException e) {
 		e.printStackTrace();
@@ -48,4 +60,22 @@ public String createOrder(HttpSession session) {
 		return order.toString();
 	}
 }
+	@PostMapping("/verify")
+	@ResponseBody
+	public boolean verifyPayment(@RequestParam  String orderId, @RequestParam String paymentId, @RequestParam String signature) {
+	    try {
+	        // Initialize Razorpay client with your API key and secret
+	        RazorpayClient razorpayClient = new RazorpayClient("rzp_test_IqHiXdxloU726E", "UlnLCUb8lRxvBKRyIYRYWrEO");
+	        // Create a signature verification data string
+	        String verificationData = orderId + "|" + paymentId;
+
+	        // Use Razorpay's utility function to verify the signature
+	        boolean isValidSignature = Utils.verifySignature(verificationData, signature, "b8T0Gi4KXEAAHcE1Aaf6Lg8J");
+
+	        return isValidSignature;
+	    } catch (RazorpayException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
 }
