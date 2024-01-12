@@ -23,15 +23,15 @@ public String pay() {
 @GetMapping("/payment-success")
 	public String paymentSuccess(HttpSession session) {
 		String mail =  (String) session.getAttribute("email");
-		Users u = service.getUser(mail);
+		Users u = service.getUsers(mail);
 		u.setPremium(true);
-		service.updateUser(u);
-		return "customerhome";
+		service.updatUsers(u);
+		return "customerHome";
 	}
 	
 	@GetMapping("/payment-failure")
 	public String paymentFailure() {
-		return "customerhome";
+		return "customerHome";
 	}
 @SuppressWarnings("finally")
 @PostMapping("/createOrder")
@@ -62,20 +62,21 @@ public String createOrder(HttpSession session) {
 }
 	@PostMapping("/verify")
 	@ResponseBody
-	public boolean verifyPayment(@RequestParam  String orderId, @RequestParam String paymentId, @RequestParam String signature) {
-	    try {
-	        // Initialize Razorpay client with your API key and secret
-	        RazorpayClient razorpayClient = new RazorpayClient("rzp_test_IqHiXdxloU726E", "UlnLCUb8lRxvBKRyIYRYWrEO");
-	        // Create a signature verification data string
-	        String verificationData = orderId + "|" + paymentId;
+	public boolean verifyPayment(@RequestParam String orderId, @RequestParam String paymentId,
+			@RequestParam String signature) {
+		try {
+			// Initialize Razorpay client with your API key and secret
+			RazorpayClient razorpayClient = new RazorpayClient("rzp_test_pvGIc9JvXWZTVS", "UlnLCUb8lRxvBKRyIYRYWrEO");
+			// Create a signature verification data string
+			String verificationData = orderId + "|" + paymentId;
 
-	        // Use Razorpay's utility function to verify the signature
-	        boolean isValidSignature = Utils.verifySignature(verificationData, signature, "b8T0Gi4KXEAAHcE1Aaf6Lg8J");
+			// Use Razorpay's utility function to verify the signature
+			boolean isValidSignature = Utils.verifySignature(verificationData, signature, "UlnLCUb8lRxvBKRyIYRYWrEO");
 
-	        return isValidSignature;
-	    } catch (RazorpayException e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+			return isValidSignature;
+		} catch (RazorpayException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
